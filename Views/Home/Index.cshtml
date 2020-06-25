@@ -1,0 +1,28 @@
+﻿<div class="col-md-3 mx-5 " style="">
+    <label style="margin-top:30px;" class="font-weight-bold">
+        Repositories :
+    </label>
+    <select class="form-control" id="Repo"></select>
+    <p id="NoOrgSelected" hidden="hidden" class="text-danger">!!!Please Select Any Organization</p>
+
+</div>
+<script>
+    $(document).ready(function () {
+
+        $.ajax({
+
+            dataType: 'json',
+            url: '@Url.Action("RepositoryList","Home")',
+            success: function (data) {
+                 var s = '<option value="0">--Repositories--</option>';
+                $("#Repo").empty();
+
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].name + '">' + data[i].name + '</option>';
+                }
+                $("#Repo").append(s);
+            }
+        });
+
+    });
+</script>
