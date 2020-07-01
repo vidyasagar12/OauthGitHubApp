@@ -29,8 +29,9 @@ namespace GitHubOauth.Services
             var request = new HttpRequestMessage(new HttpMethod(Method), new Uri(Url));
             if (RequestBody != null)
             {
-                JsonContent = new StringContent(RequestBody, Encoding.UTF8, "application/json");
+                JsonContent = new StringContent(RequestBody, Encoding.UTF8, "application/vnd.github.inertia-preview+json");
                 request.Content = JsonContent;
+                request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.inertia-preview+json"));
             }
             var response = GitClient.SendAsync(request).Result;
             if (response.IsSuccessStatusCode)

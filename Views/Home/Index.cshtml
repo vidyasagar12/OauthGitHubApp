@@ -25,4 +25,16 @@
         });
 
     });
+
+    $('#Repo').change(function () {
+        var repo = $('#Repo').val();
+        $.ajax({
+            type: 'get',
+            data: { 'repo': repo },
+            url: '@Url.Action("CreateProject", "Home")',
+            success: function (data) {
+
+            }
+        });
+    });
 </script>

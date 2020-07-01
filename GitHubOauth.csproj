@@ -16,7 +16,7 @@
     <AssemblyName>GitHubOauth</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>true</UseIISExpress>
+    <UseIISExpress>false</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44380</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -123,8 +123,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\Extension.cs" />
     <Compile Include="Models\AccessDetails.cs" />
+    <Compile Include="Models\ProjectDetails.cs" />
     <Compile Include="Models\Responses\RepositoryResponse.cs" />
+    <Compile Include="Models\UserDetails.cs" />
     <Compile Include="Service\APIServicecs.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -195,6 +198,7 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
+    <Content Include="JSON Template\projectDetails.json" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -266,7 +270,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64527</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64527/</IISUrl>
+          <IISUrl>https://githuboauth.com:480/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

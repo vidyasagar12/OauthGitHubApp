@@ -1,0 +1,22 @@
+{
+  "name": "DemoGenProject",
+  "number": 1,
+  "state": "open",
+  "creator": {
+    "login": "Varmaji",
+    "avatar_url": "https://avatars1.githubusercontent.com/u/19184319?u=2742c83ba50b55e710cd1498be49950bc8e15198&v=4",
+    "url": "https://api.github.com/users/Varmaji",
+    "html_url": "https://github.com/Varmaji",
+    "followers_url": "https://api.github.com/users/Varmaji/followers",
+    "following_url": "https://api.github.com/users/Varmaji/following{/other_user}",
+    "gists_url": "https://api.github.com/users/Varmaji/gists{/gist_id}",
+    "starred_url": "https://api.github.com/users/Varmaji/starred{/owner}{/repo}",
+    "subscriptions_url": "https://api.github.com/users/Varmaji/subscriptions",
+    "organizations_url": "https://api.github.com/users/Varmaji/orgs",
+    "repos_url": "https://api.github.com/users/Varmaji/repos",
+    "events_url": "https://api.github.com/users/Varmaji/events{/privacy}",
+    "received_events_url": "https://api.github.com/users/Varmaji/received_events",
+    "type": "User",
+    "site_admin": false
+  }
+}
