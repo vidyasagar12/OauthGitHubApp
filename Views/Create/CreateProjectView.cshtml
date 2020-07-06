@@ -1,0 +1,233 @@
+﻿@{
+    ViewBag.Title = "CreateProjectView";
+}
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 40%;
+        align-content: center;
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 60px;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    .container {
+        align-content: center;
+        padding: 2px 16px;
+    }
+
+    #createProject {
+        background: linear-gradient(45deg, rgba(150,94,205,1) 0%, rgba(0,162,255,1) 99%, rgba(0,162,255,1) 100%);
+        color: white;
+    }
+</style>
+
+@*<h2>CreateProjectView</h2>*@
+
+@*<div class="card">
+        <div class="card-header">
+            Featured
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>*@
+<br />
+<br />
+<div class="card" id="cardPro1">
+    @*<img src="img_avatar.png" alt="Avatar" style="width:100%">*@
+    <img class="load" id="git1" src="~/Content/images/GitHub-Mark.png" height="100" width="100" style="margin-left:170px" />
+    <div class="container" style="align-content:center">
+        <h4 style="margin-left:50px"><b>Select your Organization</b></h4>
+        <select name="org" id="orgList" class="form-control" style="opacity:0.8; margin-left:50px"> </select>
+
+        <h4 style="margin-left:50px"><b>Enter Project Name</b></h4>
+        <input type="text" id="input1" class="form-control" style="margin-left:50px" />
+        <br />
+        @*<div class="gallery">
+                <a target="_blank" href="img_5terre.jpg">
+                    <img src="~/Content/images/GitHub-Mark.png" alt="Cinque Terre" width="100" height="50">
+                </a>
+                <div class="desc">Add a description of the image here</div>
+            </div>
+            <br />*@
+        <h4 style="margin-left:50px"><b>Select your Template</b></h4>
+        <select name="org" id="TemplateList" class="form-control" style="opacity:0.8; margin-left:50px">
+            <option value="0">Smart-Hotel-360</option>
+            <option value="1">Parts-Unlimited</option>
+        </select>
+
+        <br />
+        <button id="createProject" class="btn btn-default" style="margin-left: 150px;">Create Project</button>
+        <br />
+        <br />
+    </div>
+</div>
+<div>
+    <input type=text id="searchuser" />
+    <button id="searchButton">Search User</button><button id="AddButton">Add User</button>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //$(".card").hide();
+        $.ajax({
+            url: '@Url.Action("Organization", "Create")',
+            type: 'Get',
+            data: {},
+            //dataType: 'json',
+            success: function (data1) {
+                $("#orgList").empty();
+                data = JSON.parse(data1);
+                var count = Object.keys(data).length;
+                if (count >= 1) {
+                    var optionhtml1 = '<option value="' +
+                        0 + '">' + "--Select Organization--" + '</option>';
+                    $("#orgList").append(optionhtml1);
+                    $("#orgList1").append(optionhtml1);
+                    $.each(data, function (i) { //data.value
+                        var optionhtml = '<option value="' +
+                            data[i].id + '">' + data[i].login + '</option>';
+                        $("#orgList").append(optionhtml);
+                        $("#orgList1").append(optionhtml);
+
+                    });
+                };
+            }
+        });
+        $("#createProject").click(function () {
+            var org = $('#orgList option:selected').text();
+            var orgval = $('#orgList option:selected').text();
+            var temp = $('#TemplateList option:selected').text();
+            var tempval = $('#TemplateList option:selected').val();
+            var projectName = $('#input1').val();
+            if (orgval == "0" || orgval == "undefined" || temp == "select template" || temp == "undefined" || projectName == "" || projectName == undefined) {
+                alert('Please fill the following details')
+            }
+            else {
+                $.ajax({
+                    url: '@Url.Action("RepositoryCreate", "Create")',
+                    type: 'POST',
+                    data: { 'org': org, 'projectName': projectName, 'template': tempval },
+                    //dataType: 'json',
+                    success: function (data1) {
+                        data = JSON.parse(data1);
+                        var count = Object.keys(data).length;
+                        if (count >= 1) {
+                            var optionhtml1 = '<option value="' +
+                                0 + '">' + "--Select Organization--" + '</option>';
+                            $("#orgList").append(optionhtml1);
+                            $("#orgList1").append(optionhtml1);
+                            $.each(data, function (i) { //data.value
+                                var optionhtml = '<option value="' +
+                                    data[i].id + '">' + data[i].login + '</option>';
+                                $("#orgList").append(optionhtml);
+                                $("#orgList1").append(optionhtml);
+
+                            });
+                        };
+                    }
+
+                });
+            }
+        });
+        @*$(function () {
+        $('#searchuser').autocomplete({
+            source: function (request, response) {
+                //filterdashboard
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("searchuser", "Create")',
+                    data: "{ 'search':'" + request.term + "' }",
+                    datatype: "json",
+                    contentType: "application/json",
+                    success:
+                        function (data) {
+                            console.log(data);
+                            response($.map(data, function (item) {
+                                return item;
+                            }));
+                        }
+                });
+            },
+                minLength: 1
+        });
+    });*@
+    //});
+        var StoreChoosedUser = [];
+        $('#AddButton').click(function () {
+            var searchbox = $('#searchuser').val();
+            if (searchbox != undefined || searchbox != "") {
+                StoreChoosedUser.push(searchbox);
+                alert('Member '+searchbox+' added successfully')
+            }
+            
+            @*$.ajax({
+                type: "GET",
+                url: '@Url.Action("searchuser", "Create")',
+                data: { 'search':searchbox },
+                datatype: "json",
+                contentType: "application/json",
+                success: function (data) {
+                    $.each(data.items, function (i) {
+                        return data.items[i].login;
+                    })
+                }
+            })*@
+        })
+    });
+    $("#searchuser").autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("searchuser", "Create")',
+                dataType: "json",
+                data: {
+                    q: request.term
+                },
+                success: function (data) {
+                    //response(data);
+                    console.log(data);
+                    //console.log(data.items);
+                    var userStore = [];
+                    $.each(data, function (item) {
+                        console.log(data[item].login)
+                        userStore.push(data[item].login)
+                       // return data[item].login;
+                    })
+                    //if (data != undefined) {
+                    response($.map(userStore, function (i) {
+                        console.log(i)
+                        return i;//data[i].login;
+                            //if (data[i] != undefined) {
+                            //    console.log(data[i])
+                            //    if (data[i].login != undefined) {
+                            //        console.log(data[i].login)
+                            //    }
+                            //}
+                            // return item;
+                            //return data.items[item].login;
+                            //console.log(data.items[item].id)
+                        }));
+                        //$.each(data.items, function (i) {
+                        //    return data.items[i].login;
+                        //    console.log(data.items[i].login)
+                        //})
+                    //}
+                }
+            });
+        },
+        minLength: 3,
+        
+    });
+
+</script>

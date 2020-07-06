@@ -31,6 +31,7 @@ namespace GitHubOauth.Controllers
             string redirectUrl = System.Configuration.ConfigurationManager.AppSettings["RedirectUri"];
             string clientId = System.Configuration.ConfigurationManager.AppSettings["ClientId"];
             string ClientSecreat= System.Configuration.ConfigurationManager.AppSettings["ClientSecret"];
+            string scope = "admin:org";
             reqBody = string.Format(reqBody, HttpUtility.UrlEncode(clientId), HttpUtility.UrlEncode(ClientSecreat), HttpUtility.UrlEncode(code),"");
             string access_Token = ApiObject.GetAccessToken(reqBody);
             if(access_Token!= "bad_verification_code")
