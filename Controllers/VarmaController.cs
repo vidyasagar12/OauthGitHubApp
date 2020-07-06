@@ -1,5 +1,4 @@
 ﻿using GitHubOauth.Models;
-using GitHubOauth.Models.Responses;
 using GitHubOauth.Services;
 using Newtonsoft.Json;
 using System;
@@ -11,22 +10,11 @@ using VstsDemoBuilder.Extensions;
 
 namespace GitHubOauth.Controllers
 {
-    public class HomeController : Controller
+    public class VarmaController : Controller
     {
-        UserDetails userDetails = new UserDetails();
-        public ActionResult Login()
-        {
-            Session["visited"] = "1";
-            string url = "https://github.com/login/oauth/authorize?client_id={0}&response_type=Assertion&state=User1&scope=user%20public_repo&redirect_uri={1}";
-            string redirectUrl = System.Configuration.ConfigurationManager.AppSettings["RedirectUri"];
-            string clientId = System.Configuration.ConfigurationManager.AppSettings["ClientId"];
-            url = string.Format(url, clientId, redirectUrl);
-            return Redirect(url);
-        }
+        // GET: Varma
         public ActionResult Index()
         {
-            /* if (Session["visited"] == null)
-                 return RedirectToAction("../Account/Verify");*/
             string code = Session["PAT"] == null ? Request.QueryString["code"] : Session["PAT"].ToString();
 
             string reqBody = "client_id={0}&client_secret={1}&response_type=Assertion&code={2}&redirect_uri={3}";
@@ -40,40 +28,38 @@ namespace GitHubOauth.Controllers
             return View();
         }
         public static APIServicecs ApiObject = new APIServicecs();
-        public JsonResult RepositoryList()
+        public JsonResult OrgDropDown()
         {
+            List<OrgDetails> ListOrg = new List<OrgDetails>();
             try
             {
-                List<RepositoryResponse> RepoList = new List<RepositoryResponse>();
+                
                 ApiObject = new APIServicecs(Session["PAT"].ToString());
-                string RepositoriesString = ApiObject.ApiService("https://api.github.com/user/repos");
-                if (!string.IsNullOrEmpty(RepositoriesString))
-                    RepoList = JsonConvert.DeserializeObject<List<RepositoryResponse>>(RepositoriesString);
-                return Json(RepoList, JsonRequestBehavior.AllowGet);
+                ListOrg = JsonConvert.DeserializeObject<List<OrgDetails>>(ApiObject.ApiService("https://api.github.com/user/orgs"));
             }
-            catch (Exception Ex)
+            catch(Exception Ex)
             {
-                return null;
+
             }
+            return Json(ListOrg,JsonRequestBehavior.AllowGet);
         }
-        public JsonResult CreateProject(string repo)
+
+        public JsonResult CreateProject(string org)
         {
             ProjectDetails projectDetails = new ProjectDetails();
             try
             {
                 string templatesPath = Server.MapPath("~") + @"\JSON Template\";
                 ApiObject = new APIServicecs(Session["PAT"].ToString());
-                userDetails = JsonConvert.DeserializeObject<UserDetails>(ApiObject.ApiService("https://api.github.com/user"));
-                string ownername=userDetails.login;
-                string url = "https://api.github.com/repos/"+ownername+"/"+repo+"/projects";
+                string url = "https://api.github.com/repos/orgs/'"+org+"'/projects";
                 string RqstBody = "";
-                if (System.IO.File.Exists(templatesPath+ @"\projectDetails.json"))
+                if (System.IO.File.Exists(templatesPath + @"\projectDetails.json"))
                 {
                     RqstBody = projectDetails.ReadJsonFile(templatesPath + @"\projectDetails.json");
                 }
-                projectDetails =JsonConvert.DeserializeObject<ProjectDetails>(ApiObject.ApiService(url,"POST", RqstBody));
+                projectDetails = JsonConvert.DeserializeObject<ProjectDetails>(ApiObject.ApiService(url, "POST", RqstBody));
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }

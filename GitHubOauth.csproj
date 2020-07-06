@@ -16,7 +16,7 @@
     <AssemblyName>GitHubOauth</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressSSLPort>44380</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -123,8 +123,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\VarmaController.cs" />
     <Compile Include="Extensions\Extension.cs" />
     <Compile Include="Models\AccessDetails.cs" />
+    <Compile Include="Models\OrgDetails.cs" />
     <Compile Include="Models\ProjectDetails.cs" />
     <Compile Include="Models\Responses\RepositoryResponse.cs" />
     <Compile Include="Models\UserDetails.cs" />
@@ -219,9 +221,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Varma\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Varmacontroller\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -270,7 +274,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64527</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://githuboauth.com:480/</IISUrl>
+          <IISUrl>http://localhost:64527/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

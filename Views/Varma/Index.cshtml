@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Varma's Github</h2>
+
+<div class="col-md-3 mx-5 " style="">
+    <label style="margin-top:30px;" class="font-weight-bold">
+        Organization :
+    </label>
+    <select class="form-control" id="Org"></select>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            dataType: 'JSON',
+            url: '@Url.Action("OrgDropDown", "Varma")',
+            success: function (data) {
+                console.log(data);
+                var s = '<option value="0">--Organization--</option>';
+                for (i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].login + '">' + data[i].login + '</option>';
+                }
+                $("#Org").append(s);
+            }
+
+        });
+    })
+
+    $('#Org').change(function () {
+        var org = $('#Org').val();
+        $.ajax({
+            type: 'get',
+            data: { 'org': org },
+            url: '@Url.Action("CreateProject", "Varma")',
+            success: function (data) {
+
+            }
+        });
+    });
+</script>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -21,7 +22,8 @@ namespace GitHubOauth.Services
             GitClient.DefaultRequestHeaders.Accept.Add(
                 new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
             if (PAT != null)
-                GitClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", PAT);
+                GitClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Token", PAT);
+               
         }
         public string ApiService(string Url, string Method = "GET", string RequestBody = null)
         {
@@ -32,6 +34,7 @@ namespace GitHubOauth.Services
                 JsonContent = new StringContent(RequestBody, Encoding.UTF8, "application/vnd.github.inertia-preview+json");
                 request.Content = JsonContent;
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github.inertia-preview+json"));
+                
             }
             var response = GitClient.SendAsync(request).Result;
             if (response.IsSuccessStatusCode)
