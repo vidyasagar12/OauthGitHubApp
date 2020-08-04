@@ -46,7 +46,7 @@ namespace GitHubOauth.Controllers
             {
                 List<RepositoryResponse> RepoList = new List<RepositoryResponse>();
                 ApiObject = new APIServicecs(Session["PAT"].ToString());
-                string RepositoriesString = ApiObject.ApiService("https://api.github.com/user/repos");
+                string RepositoriesString = ApiObject.ApiService("https://api.github.com/orgs/VarmasGitHub/repos");
                 if (!string.IsNullOrEmpty(RepositoriesString))
                     RepoList = JsonConvert.DeserializeObject<List<RepositoryResponse>>(RepositoriesString);
                 return Json(RepoList, JsonRequestBehavior.AllowGet);
