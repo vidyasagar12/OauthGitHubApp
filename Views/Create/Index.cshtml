@@ -1,0 +1,310 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<style>
+    .card {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        transition: 0.3s;
+        width: 40%;
+        align-content: center;
+        margin: 0 auto; /* Added */
+        float: none; /* Added */
+        margin-bottom: 10px;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+        }
+
+    .container {
+        align-content:center;
+        padding: 2px 16px;
+    }
+
+    #panel, #flip {
+        padding: 5px;
+        text-align: center;
+        /*background-color: black;*/
+        background: linear-gradient(45deg, rgba(150,94,205,1) 0%, rgba(0,162,255,1) 99%, rgba(0,162,255,1) 100%);
+        color: white;
+        border: solid 1px #c3c3c3;
+        width: 97%;
+        margin-left: 20px;
+    }
+
+    #panel {
+        padding: 10px;
+        display: none;
+    }
+
+    #panel1, #flip1 {
+        padding: 5px;
+        text-align: center;
+        /*background-color: black;*/
+        background: linear-gradient(45deg, rgba(150,94,205,1) 0%, rgba(0,162,255,1) 99%, rgba(0,162,255,1) 100%);
+        color: white;
+        border: solid 1px #c3c3c3;
+        width: 97%;
+        margin-left: 20px;
+    }
+
+    #panel1 {
+        padding: 10px;
+        display: none;
+    }
+</style>
+<h1 align="center">Create Project & Repository in GitHub</h1>
+<br />
+
+<div id="flip" style="padding: 5px;text-align: center;background-color: black;color:white;border: solid 1px #c3c3c3;">Create Demo Project</div>
+<div id="panel" hidden>
+    <input type="radio" id="projectOrg" name="project" value="projectOrg">
+    <label for="projectOrg">create a Project in a Organization</label>
+    <input type="radio" id="projectRepo" name="project" value="projectRepo">
+    <label for="projectRepo">create a Project in a Repository</label>
+    &nbsp;&nbsp;&nbsp;
+    <button id="ProjectButton" class="btn btn-default" style="background-color:blueviolet;color:white">Select</button>
+</div>
+<br />
+<br />
+<div id="flip1" style="padding: 5px;text-align: center;background-color: black;color:white;border: solid 1px #c3c3c3;">Create Demo Repository</div>
+<div id="panel1" hidden>
+    <input type="radio" id="Repo" name="repo" value="Repo">
+    <label for="Repo">create a Repository in your Account</label>
+    <input type="radio" id="RepoOrg" name="repo" value="RepoOrganization">
+    <label for="RepoOrg">create a Repository in a Organization</label>
+    &nbsp;&nbsp;&nbsp;
+    <button id="RepoButton" class="btn btn-default" style="background-color:blueviolet;color:white">Select</button>
+    <br><br />
+</div>
+<br /><br />
+      <div class="card" id="cardPro1">
+          @*<img src="img_avatar.png" alt="Avatar" style="width:100%">*@
+          <img class="load" id="git1" src="~/Content/images/GitHub-Mark.png" height="100" width="100" style="margin-left:170px"/>
+          <div class="container" style="align-content:center">
+              <h4 style="margin-left:50px"><b>Select your Organization</b></h4>
+              <select name="org" id="orgList" class="form-control" style="opacity:0.8; margin-left:50px"> </select>
+
+              <h4 style="margin-left:50px"><b>Enter Project Name</b></h4>
+              <input type="text" id="input1" class="form-control" style="margin-left:50px"/>
+              <br />
+              <button id="createProject1" class="btn btn-default" style="margin-left:120px">Create Project</button>
+              <br />
+              <br />
+          </div>
+      </div>
+      <div class="card" id="cardPro2">
+          <img class="load" id="git13" src="~/Content/images/GitHub-Mark.png" height="100" width="100" style="margin-left:170px" />
+          <div class="container">
+              <h4 style="margin-left:50px"><b>Select Your Repository</b></h4>
+              <select name="repo" id="proRepo" class="form-control" style="opacity:0.8;margin-left:50px"> </select>
+              <br />
+              <h4 style="margin-left:50px"><b>Enter Project Name</b></h4>
+              <input type="text" id="input2" class="form-control" style="margin-left:50px" />
+              <br />
+              <button id="createProject2" class="btn btn-default" style="margin-left:120px">Create Project</button>
+              <br /><br />
+          </div>
+      </div>
+      <div class="card" id="cardPro3">
+          @*<img src="img_avatar.png" alt="Avatar" style="width:100%">*@
+          <img class="load" id="git12" src="~/Content/images/GitHub-Mark.png" height="100" width="100" style="margin-left:170px" />
+          <div class="container">
+              <h4 style="margin-left:30px"><b>Create a Repo in your Account</b></h4>
+              <select name="org" id="proRepo1" class="form-control" style="opacity:0.8; margin-left:50px"> </select>
+              <br />
+              <h4 style="margin-left:30px">Enter the Repo Name</h4>
+              <br />
+              <input type="text" id="input3" class="form-control" style="margin-left:50px" />
+              @*<p>Architect & Engineer</p>*@
+              <br />
+              <button id="createRepository" class="btn btn-default" style="margin-left:120px">Create a Repo</button>
+              <br /><br /> 
+          </div>
+      </div>
+      <div class="card" id="cardPro4">
+          <img class="load" id="git14" src="~/Content/images/GitHub-Mark.png" height="100" width="100" style="margin-left:170px" />
+          <div class="container">
+              <h4 style="margin-left:50px"><b>Create a Repo in your Account</b></h4>
+              <select name="org" id="orgList1" class="form-control" style="opacity:0.8;margin-left:50px"> </select>
+              <br />
+              <h4 style="margin-left:50px">Enter the Repo Name</h4>
+              <input type="text" id="input4" class="form-control" style="margin-left:50px" />
+
+              <br />
+              <button id="createRepository1" class="btn btn-default" style="margin-left:120px">Create a Repo</button>
+              <br />
+
+          </div>
+      </div>
+
+
+
+<script>
+    $(document).ready(function () {
+        //document.getElementById("flip").hidden = false;
+        //document.getElementById("panel").hidden = true;
+       $(".card").hide();
+         $.ajax({
+             url: '@Url.Action("Organization", "Create")',
+             type: 'Get',
+             data: {},
+             //dataType: 'json',
+             success: function (data1) {
+                 $("#orgList").empty();
+                 data = JSON.parse(data1);
+                 var count = Object.keys(data).length;
+                 if (count >= 1) {
+                     var optionhtml1 = '<option value="' +
+                         0 + '">' + "--Select Organization--" + '</option>';
+                     $("#orgList").append(optionhtml1);
+                     $("#orgList1").append(optionhtml1);
+                     $.each(data, function (i) { //data.value
+                         var optionhtml = '<option value="' +
+                             // data.value[i].id + '">' + data.value[i].name + '</option>';
+                             data[i].id + '">' + data[i].login + '</option>';
+                         $("#orgList").append(optionhtml);
+                         $("#orgList1").append(optionhtml);
+
+                     });
+                 };
+             }
+         });
+        $.ajax({
+            dataType: 'json',
+            url: '@Url.Action("RepositoryList","Home")',
+            success: function (data) {
+                var s = '<option value="0">--Select Repositories--</option>';
+                var sa = '<option value="0">--Select Repositories--</option>';
+                $("#proRepo").empty();
+                $("#proRepo").append(s);
+                for (var i = 0; i < data.length; i++) {
+                    s += '<option value="' + data[i].name + '">' + data[i].name + '</option>';
+                }
+
+                $("#proRepo1").append(sa);
+                for (var i = 0; i < data.length; i++) {
+                    sa += '<option value="' + data[i].name + '">' + data[i].name + '</option>';
+                }
+                $("#proRepo").append(s);
+                $("#proRepo1").append(sa);
+            }
+        });
+        $("#flip").click(function () {
+            $("#panel").slideToggle("slow");
+        });
+        $("#flip1").click(function () {
+            $("#panel1").slideToggle("slow");
+        });
+        $('#ProjectButton').click(function () {
+            var radioValue = $("input[name='project']:checked").val();
+            if (radioValue == "projectOrg") {
+                $('.card').hide();
+                $('#cardPro1').show();
+                ProjectOrg();
+            }
+            else if (radioValue == "projectRepo") {
+                $('.card').hide();
+                $('#cardPro2').show();
+                ProjectRepo();
+            }
+            else {
+                alert('Please select the check box')
+            }
+        })
+        $('#RepoButton').click(function () {
+            var radioValue = $("input[name='repo']:checked").val();
+            if (radioValue == "Repo") {
+                $('.card').hide();
+                $('#cardPro3').show();
+            }
+            else if (radioValue == "RepoOrganization") {
+                $('.card').hide();
+                $('#cardPro4').show();
+            }
+            else {
+                alert('Please select the check box')
+            }
+        })
+    });
+    $('#createProject1').click(function () {
+        var org = $('#orgList option:selected').text();
+        var projectName = $('#input1').val();
+        //var orgName = $("#OrganizationDrop option:selected").text();
+        alert('org :' + org + 'projectName : ' + projectName)
+        $.ajax({
+             url: '@Url.Action("CreateOrgProject", "Create")',
+            type: 'Get',
+            data: { 'org': org, 'projectName': projectName },
+             //dataType: 'json',
+             success: function (data1) {
+                 $("#orgList").empty();
+                 data = JSON.parse(data1);
+                 var count = Object.keys(data).length;
+                 if (count >= 1) {
+                 }
+
+             }
+         });
+
+    })
+    $('#createProject2').click(function () {
+        var org = $('#proRepo option:selected').text();
+        var projectName = $('#input2').val();
+        //var orgName = $("#OrganizationDrop option:selected").text();
+        alert('org :' + org + 'projectName : ' + projectName)
+        $.ajax({
+             url: '@Url.Action("CreateProject", "Create")',
+            type: 'Get',
+            data: { 'repo': org, 'projectName': projectName },
+             dataType: 'json',
+            success: function (data) {
+                alert('navigate to the project  <a href=' + data.html_url + '>' + data.html_url+'</a>')
+
+             }
+        });
+
+    })
+    $('#createRepository').click(function () {
+            var projectName = $('#input3').val();
+            var repo = $("#proRepo1 option:selected").text();
+            alert('projectName : ' + projectName)
+            $.ajax({
+                url: '@Url.Action("CreateRepoTemplate", "Create")',
+                type: 'POST',
+                data: { 'repo': repo, 'projectName': projectName },
+                // dataType: 'json',
+                success: function (data1) {
+                    data = JSON.parse(data1);
+                    var count = Object.keys(data).length;
+                    if (count >= 1) {
+                    }     alert('navigate to the Repository  <a href=' + data.html_url + '>' + data.html_url + '</a>')
+                }
+            })
+    })
+    $('#createRepository1').click(function () {
+            var projectName = $('#input4').val();
+            var org = $("#orgList1 option:selected").text();
+            alert('projectName : ' + projectName)
+            $.ajax({
+                url: '@Url.Action("CreateOrgRepoTemplate", "Create")',
+                type: 'POST',
+                data: { 'org': org, 'projectName': projectName },
+                // dataType: 'json',
+                success: function (data1) {
+                    data = JSON.parse(data1);
+                    var count = Object.keys(data).length;
+                    if (count >= 1) {
+                    }     alert('navigate to the Repository  <a href=' + data.html_url + '>' + data.html_url + '</a>')
+                }
+            })
+    })
+    
+    function ProjectOrg() {
+
+    }
+    function ProjectRepo() {
+
+    }
+</script>
