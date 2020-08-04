@@ -1,0 +1,6 @@
+{
+  "owner": "$owner$",
+  "name": "$name$",
+  "description": "This is your first repository",
+  "private": false
+}
