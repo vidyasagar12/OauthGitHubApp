@@ -1,0 +1,74 @@
+using System;
+using System.Collections.Generic;
+using Newtonsoft.Json;
+using System.IO;
+using File_IO_consoleapp;
+namespace File_IO_consoleapp
+{
+    
+    class Program
+    {
+        public 
+        static void Main(string[] args)
+        {
+           
+                string path = " ";
+                path = "D:File_IO";
+                if (!Directory.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                Console.WriteLine("Enter file name");
+                string filename = Console.ReadLine();
+                string file_path = Path.Combine(path, filename);
+            try
+            {
+                if (!File.Exists(file_path))
+                {
+                    File.Create(file_path);
+                }
+                Console.WriteLine("enter employee Details\n");
+
+                // Console.WriteLine("enter number of employees");
+                string repeat = "Y";
+                List<Emp_Details> emp1 = new List<Emp_Details>(100);
+                foreach(var item in emp1)
+                {
+                    if (repeat == "Y")
+                    {
+
+                        Console.Write("enter employee id:");
+                        item.id = Console.ReadLine();
+                        Console.Write("enter employee name:");
+                        item.employee_name = Console.ReadLine();
+                        Console.Write("enter employee age:");
+                        item.employee_age = Console.ReadLine();
+                        Console.Write("enter employee salary:");
+                        item.employee_salary = Console.ReadLine();
+                        Console.Write("enter employee profile image:");
+                        item.profile_image = Console.ReadLine();
+                    }
+                    else { break; }
+                    Console.WriteLine(  "enter Y to continue adding details");
+                    repeat=Console.ReadLine().ToUpper();
+                }
+                File.WriteAllText(file_path, JsonConvert.SerializeObject(emp1));
+                Console.WriteLine("-----details written to JSON file-----");
+                emp1 = JsonConvert.DeserializeObject<List<Emp_Details>>(File.ReadAllText(file_path));
+                Console.WriteLine("-----Details from the J File------");
+                
+                foreach(var item in emp1)
+                {
+                    Console.WriteLine($"ID:{item.id}\n Name:{item.employee_name}\n Age:{item.employee_age} \n Salary:{item.employee_salary} \nProfile_Image:{item.profile_image}");
+                }
+                File.AppendAllText(Path.Combine(path, "All_Entries.json"), JsonConvert.SerializeObject(emp1));
+            }
+           finally
+            {
+                File.Delete(file_path);
+            }
+
+        }
+        
+    }
+}
