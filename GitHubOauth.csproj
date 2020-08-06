@@ -16,7 +16,7 @@
     <AssemblyName>GitHubOauth</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -211,6 +211,9 @@
     <Content Include="Jsons\ColumnTemplate.json" />
     <Content Include="Jsons\OrgProject.json" />
     <Content Include="Jsons\ForkRepo_Template.json" />
+    <Content Include=".github\workflows\main.yml" />
+    <Content Include=".github\workflows\SampleWorkFlow.yml" />
+    <Content Include=".github\workflows\Sample.yml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -285,7 +288,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64527</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://githuboauth.com:450</IISUrl>
+          <IISUrl>http://localhost:64527/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
