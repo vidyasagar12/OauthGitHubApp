@@ -211,6 +211,9 @@
     <Content Include="Jsons\ColumnTemplate.json" />
     <Content Include="Jsons\OrgProject.json" />
     <Content Include="Jsons\ForkRepo_Template.json" />
+    <Content Include=".github\workflows\main.yml" />
+    <Content Include=".github\workflows\SampleWorkFlow.yml" />
+    <Content Include=".github\workflows\Sample.yml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
